@@ -1,6 +1,39 @@
 # Import Parameters
 from parameters import *
 
+# Define Ball class
+class Ball(object):
+    def __init__(self, color):
+        '''
+        Initializes a Ball object
+
+        color (tuple): A tuple with RGB values
+
+        A Ball object has the following attribute:
+            self.color (tuple, determined by input tuple)
+
+        '''
+        self.color = color
+
+    def set_color(self, color):
+        '''
+        Changes color of Ball object
+
+        color (tuple): A tuple with RGB values
+
+        Changes attribute: self.color
+        '''
+        self.color = color
+
+    def get_color(self):
+        '''
+        Get color of Ball object
+
+        Returns: self.color
+        '''
+        return self.color
+
+
 # Define parent class for paddles
 class Paddle(object):
     def __init__(self, color):
