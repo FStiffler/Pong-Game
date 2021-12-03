@@ -50,14 +50,22 @@ class PaddleLeft(Paddle):
             self.top_left (tuple, coordinates of top left corner of paddle)
             self.top_right (tuple, coordinates of top right corner of paddle)
             self.down_right (tuple, coordinates of down right corner of paddle)
-            self.top_right (tuple, coordinates of down right corner of paddle)
+            self.down_left (tuple, coordinates of down right corner of paddle)
         '''
         Paddle.__init__(self, color)
         self.position = [PAD_WIDTH_HALF + 0.01 * WIDTH, HEIGHT // 2]
         self.top_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
         self.top_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
-        self.top_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
-        self.top_right = (self.position[0] - PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+        self.down_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+        self.down_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+
+    def get_polygon(self):
+        '''
+        Get list of corner points of polygon shape
+
+        Returns: [self.top_left,self.top_right,self.down_right,self.down_left]
+        '''
+        return [self.top_left, self.top_right, self.down_right, self.down_left]
 
 
 # Define right paddle child class
@@ -76,12 +84,20 @@ class PaddleRight(Paddle):
             self.top_left (tuple, coordinates of top left corner of paddle)
             self.top_right (tuple, coordinates of top right corner of paddle)
             self.down_right (tuple, coordinates of down right corner of paddle)
-            self.top_right (tuple, coordinates of down right corner of paddle)
+            self.down_left (tuple, coordinates of down right corner of paddle)
         '''
         Paddle.__init__(self, color)
-        self.position = [WIDTH - PAD_WIDTH_HALF - 0.01 * WIDTH, HEIGHT // 2]
+        self.position = [PAD_WIDTH_HALF + 0.01 * WIDTH, HEIGHT // 2]
         self.top_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
         self.top_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
-        self.top_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
-        self.top_right = (self.position[0] - PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+        self.down_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+        self.down_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+
+    def get_polygon(self):
+        '''
+        Get list of corner points of polygon shape
+
+        Returns: [self.top_left,self.top_right,self.down_right,self.down_left]
+        '''
+        return [self.top_left, self.top_right, self.down_right, self.down_left]
 
