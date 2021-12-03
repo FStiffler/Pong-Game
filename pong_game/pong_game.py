@@ -8,9 +8,10 @@ from classes import *
 # Initialize pygame
 pygame.init()
 
-# Create paddle objects
+# Create objects from pre-defined classes
 left_paddle = PaddleLeft(BLUE)
 right_paddle = PaddleRight(BLUE)
+ball = Ball(RED)
 
 # Initalize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -39,7 +40,7 @@ while running:
     pygame.draw.circle(screen, WHITE, center=(WIDTH // 2, HEIGHT // 2), radius=WIDTH * 0.1, width=1)
 
     # Draw the ball at center of field
-    pygame.draw.circle(screen, RED, (WIDTH // 2, HEIGHT // 2), 10)
+    pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
 
     # Draw paddle on the left
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
