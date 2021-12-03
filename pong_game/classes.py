@@ -3,17 +3,19 @@ from parameters import *
 
 # Define Ball class
 class Ball(object):
-    def __init__(self, color):
+    def __init__(self, color, size=10):
         '''
         Initializes a Ball object
 
         color (tuple): A tuple with RGB values
+        size (int): Integer defining the size of ball, default = 10
 
         A Ball object has the following attribute:
             self.color (tuple, determined by input tuple)
 
         '''
         self.color = color
+        self.size = size
 
     def set_color(self, color):
         '''
@@ -32,6 +34,24 @@ class Ball(object):
         Returns: self.color
         '''
         return self.color
+
+    def set_size(self, size):
+        '''
+        Changes size of Ball object
+
+        size (int): Integer defining the size of ball
+
+        Changes attribute: self.size
+        '''
+        self.size = size
+
+    def get_size(self):
+        '''
+        Get size of Ball object
+
+        Returns: self.size
+        '''
+        return self.size
 
 
 # Define parent class for paddles
@@ -137,5 +157,6 @@ class PaddleRight(Paddle):
 
 if __name__ == '__main__':
 
+    ball = Ball(WHITE)
     left = PaddleLeft(WHITE)
     right = PaddleRight(WHITE)
