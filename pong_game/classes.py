@@ -12,10 +12,13 @@ class Ball(object):
 
         A Ball object has the following attribute:
             self.color (tuple, determined by input tuple)
+            self.size (int, determined by size)
+            self.position (tuple, defines start position of ball)
 
         '''
         self.color = color
         self.size = size
+        self.position = (WIDTH // 2, HEIGHT // 2)
 
     def set_color(self, color):
         '''
@@ -52,6 +55,14 @@ class Ball(object):
         Returns: self.size
         '''
         return self.size
+
+    def get_position(self):
+        '''
+        Get start position of Ball object
+
+        Returns: self.position
+        '''
+        return self.position
 
 
 # Define parent class for paddles
