@@ -3,13 +3,14 @@ import pygame
 
 # Import modules
 from parameters import *
+from classes import *
 
 # Initialize pygame
 pygame.init()
 
-# Global variables
-padl_position = [PAD_WIDTH_HALF + 0.01 * WIDTH, HEIGHT // 2]  # Initial position of left paddle
-padr_position = [WIDTH - PAD_WIDTH_HALF - 0.01 * WIDTH, HEIGHT // 2]  # Initial position of right paddle
+# Create paddle objects
+left_paddle = PaddleLeft(BLUE)
+right_paddle = PaddleRight(BLUE)
 
 # Initalize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -41,26 +42,10 @@ while running:
     pygame.draw.circle(screen, RED, (WIDTH // 2, HEIGHT // 2), 10)
 
     # Draw paddle on the left
-    pygame.draw.polygon(screen,
-                        BLUE,
-                        points=[
-                            (padl_position[0] - PAD_WIDTH_HALF, padl_position[1] + PAD_HEIGHT_HALF),  # x1&y1 top left
-                            (padl_position[0] + PAD_WIDTH_HALF, padl_position[1] + PAD_HEIGHT_HALF),  # x2&y2 top right
-                            (padl_position[0] + PAD_WIDTH_HALF, padl_position[1] - PAD_HEIGHT_HALF),  # x3&y3 down right
-                            (padl_position[0] - PAD_WIDTH_HALF, padl_position[1] - PAD_HEIGHT_HALF),  # x4&y4 down left
-                                ]
-                        )
+    pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
 
     # Draw paddle on the right
-    pygame.draw.polygon(screen,
-                        BLUE,
-                        points=[
-                            (padr_position[0] - PAD_WIDTH_HALF, padr_position[1] + PAD_HEIGHT_HALF),  # x1&y1 top left
-                            (padr_position[0] + PAD_WIDTH_HALF, padr_position[1] + PAD_HEIGHT_HALF),  # x2&y2 top right
-                            (padr_position[0] + PAD_WIDTH_HALF, padr_position[1] - PAD_HEIGHT_HALF),  # x3&y3 down right
-                            (padr_position[0] - PAD_WIDTH_HALF, padr_position[1] - PAD_HEIGHT_HALF),  # x4&y4 down left
-                        ]
-                        )
+    pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
 
     # Flip the display
     pygame.display.flip()

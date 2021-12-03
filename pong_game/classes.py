@@ -87,7 +87,7 @@ class PaddleRight(Paddle):
             self.down_left (tuple, coordinates of down right corner of paddle)
         '''
         Paddle.__init__(self, color)
-        self.position = [PAD_WIDTH_HALF + 0.01 * WIDTH, HEIGHT // 2]
+        self.position = [WIDTH - PAD_WIDTH_HALF - 0.01 * WIDTH, HEIGHT // 2]
         self.top_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
         self.top_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
         self.down_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
@@ -101,3 +101,8 @@ class PaddleRight(Paddle):
         '''
         return [self.top_left, self.top_right, self.down_right, self.down_left]
 
+
+if __name__ == '__main__':
+
+    left = PaddleLeft(WHITE)
+    right = PaddleRight(WHITE)
