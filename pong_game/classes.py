@@ -77,6 +77,14 @@ class Ball(object):
         '''
         return self.position
 
+    def set_back(self):
+        '''
+        Set Ball object back to start position
+
+        Returns: self.position
+        '''
+        self.position = (WIDTH // 2, HEIGHT // 2)
+
 
 # Define parent class for paddles
 class Paddle(object):

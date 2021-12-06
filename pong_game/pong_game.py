@@ -53,7 +53,7 @@ while running:
     pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
 
     # Move ball
-    y_direction = ball_movement(x_direction, y_direction, HEIGHT, ball)
+    x_direction, y_direction = ball_movement(x_direction, y_direction, WIDTH, HEIGHT, ball)
 
     # Draw paddle on the left
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
