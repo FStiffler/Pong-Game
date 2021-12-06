@@ -44,16 +44,24 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Capture commands to move paddle by user
+        # Capture commands by user to move paddle (Holding arrows to move paddle)
         elif event.type == pygame.KEYDOWN:
 
             # Capture up command
             if event.key == pygame.K_UP:
-                command = -10
+                command = -1
 
             # Capture down command
             if event.key == pygame.K_DOWN:
-                command = +10
+                command = +1
+
+        # Capturing stop command by user (User released button)
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                command = 0
+
+
+
 
     # Define color of background
     screen.fill(BLACK)

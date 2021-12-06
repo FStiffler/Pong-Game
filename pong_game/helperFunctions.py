@@ -66,7 +66,4 @@ def paddle_movement(command, left_paddle):
     # New Paddle Position
     left_paddle.set_position(command)
 
-    # Cancel user command
-    command = 0
-
     return command
