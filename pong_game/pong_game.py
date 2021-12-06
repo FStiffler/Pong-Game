@@ -16,10 +16,10 @@ right_paddle = PaddleRight(BLUE)
 ball = Ball(RED)
 
 # Create random movement direction of ball
-x_direction = random.sample([1, -1], 1)[0]  # Randomly define movement to left or right
-y_direction = random.uniform(-1, 1)  # Ball moves with maximal slope of 1
+x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
+y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
 
-# Initalize game window
+# Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
 
 # Set title
@@ -63,7 +63,7 @@ while running:
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
 
     # Define refresh time
-    clock.tick(500)
+    clock.tick(300)
 
     # Flip the display
     pygame.display.flip()

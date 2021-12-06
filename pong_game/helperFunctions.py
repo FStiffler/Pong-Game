@@ -16,13 +16,13 @@ def ball_movement(x_direction, y_direction, width, height, ball):
     ball.set_position(x_direction, y_direction)
 
     # If ball touches upper edge
-    if ball.get_position()[1] + ball.get_size() == height:
+    if ball.get_position()[1] + ball.get_size() > height:
         # invert y movement
         y_direction = y_direction * -1
         return x_direction, y_direction
 
     # If ball touches lower edge
-    elif ball.get_position()[1] - ball.get_size() == 0:
+    elif ball.get_position()[1] - ball.get_size() < 0:
         # invert y movement
         y_direction = y_direction * -1
         return x_direction, y_direction
