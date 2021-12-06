@@ -22,6 +22,9 @@ y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
 # Create global paddle movement variable
 command = 0
 
+# Create global score variable
+score = [0,0]
+
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
 
@@ -73,7 +76,7 @@ while running:
     pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
 
     # Move ball
-    x_direction, y_direction = ball_movement(x_direction, y_direction, WIDTH, HEIGHT, ball)
+    x_direction, y_direction, score = ball_movement(x_direction, y_direction, WIDTH, HEIGHT, ball, score)
 
     # Draw paddle on the left
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
@@ -86,6 +89,15 @@ while running:
 
     # Define refresh time
     clock.tick(300)
+
+    # Score Boards in Window
+    myfont1 = pygame.font.SysFont("Comic Sans MS", 20)
+    label1 = myfont1.render("Score: " + str(score[0]), 1, WHITE)
+    screen.blit(label1, (0.25*WIDTH-30, 10))
+
+    myfont2 = pygame.font.SysFont("Comic Sans MS", 20)
+    label2 = myfont2.render("Score: " + str(score[1]), 1, WHITE)
+    screen.blit(label2, (0.75*WIDTH-30, 10))
 
     # Flip the display
     pygame.display.flip()

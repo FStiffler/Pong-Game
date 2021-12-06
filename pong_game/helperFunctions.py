@@ -1,14 +1,16 @@
 # Import required packages
 import random
 
+
 # Define a function to control movement of ball
-def ball_movement(x_direction, y_direction, width, height, ball):
+def ball_movement(x_direction, y_direction, width, height, ball, score):
     '''
     x_direction (int): Integer defining the movement direction on x axis
     y_direction (int): Integer defining the movement direction on y axis
     height (int): Defines the height of the playing window
     width (int): Defines the width of the playing window
     ball (Ball): The ball object of class Ball
+    score (list): A list with two elements, the score of left and right players
 
     Returns:
     y_direction (int): Movement direction on y-axis after checking all conditions
@@ -22,13 +24,13 @@ def ball_movement(x_direction, y_direction, width, height, ball):
     if ball.get_position()[1] + ball.get_size() > height:
         # invert y movement
         y_direction = y_direction * -1
-        return x_direction, y_direction
+        return x_direction, y_direction, score
 
     # If ball touches lower edge
     elif ball.get_position()[1] - ball.get_size() < 0:
         # invert y movement
         y_direction = y_direction * -1
-        return x_direction, y_direction
+        return x_direction, y_direction, score
 
     # If ball touches right edge
     elif ball.get_position()[0] - ball.get_size() > width:
@@ -37,8 +39,10 @@ def ball_movement(x_direction, y_direction, width, height, ball):
         #  New ball direction
         x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
         y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
+        # Increase score of left player
+        score[0] += 1
 
-        return x_direction, y_direction
+        return x_direction, y_direction, score
 
     # If ball touches left edge
     elif ball.get_position()[0] + ball.get_size() < 0:
@@ -47,12 +51,15 @@ def ball_movement(x_direction, y_direction, width, height, ball):
         #  New ball direction
         x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
         y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
+        # Increase score of right player
+        score[1] += 1
 
-        return x_direction, y_direction
+        return x_direction, y_direction, score
 
     # If nothing of the above happens
     else:
-        return x_direction, y_direction
+        return x_direction, y_direction, score
+
 
 # Define a function to control movement of paddle
 def paddle_movement(command, height, paddle):
@@ -83,4 +90,3 @@ def paddle_movement(command, height, paddle):
         command = 0
 
     return command
-
