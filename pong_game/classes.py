@@ -56,7 +56,7 @@ class Ball(object):
         '''
         return self.size
 
-    def set_position(self, x,y):
+    def set_position(self, x, y):
         '''
         Changes position of Ball object (animation of ball)
 
@@ -67,7 +67,7 @@ class Ball(object):
         '''
         new_x = self.position[0]+x
         new_y = self.position[1]+y
-        self.position = (new_x,new_y)
+        self.position = (new_x, new_y)
 
     def get_position(self):
         '''

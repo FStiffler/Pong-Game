@@ -21,7 +21,12 @@ def ball_movement(x, y, height, ball):
         return y_invert
 
     # If ball touches lower frame
-    if ball.get_position()[1] - ball.get_size() == 0:
+    elif ball.get_position()[1] - ball.get_size() == 0:
         # invert y movement
         y_invert = y * -1
         return y_invert
+
+    # If nothing of the above happens
+    else:
+        return y
+
