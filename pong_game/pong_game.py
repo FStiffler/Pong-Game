@@ -20,7 +20,7 @@ x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right
 y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
 
 # Create global paddle movement variable
-paddle_movement = 0
+command = 0
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -49,11 +49,11 @@ while running:
 
             # Capture up command
             if event.key == pygame.K_UP:
-                paddle_movement = +1
+                command = -10
 
             # Capture down command
             if event.key == pygame.K_DOWN:
-                paddle_movement = -1
+                command = +10
 
     # Define color of background
     screen.fill(BLACK)
@@ -74,7 +74,7 @@ while running:
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
 
     # Move paddle based on captured movement command of user
-    left_paddle.set_position(paddle_movement)
+    command = paddle_movement(command, left_paddle)
 
     # Draw paddle on the right
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())

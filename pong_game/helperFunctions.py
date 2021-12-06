@@ -54,3 +54,19 @@ def ball_movement(x_direction, y_direction, width, height, ball):
     else:
         return x_direction, y_direction
 
+# Define a function to control movement of paddle
+def paddle_movement(command, left_paddle):
+    '''
+    paddle_movement (int): Integer defining the movement direction on x axis
+
+    Returns:
+    paddle_movement (int): Integer defining the movement after command was executed
+    '''
+
+    # New Paddle Position
+    left_paddle.set_position(command)
+
+    # Cancel user command
+    command = 0
+
+    return command
