@@ -56,6 +56,19 @@ class Ball(object):
         '''
         return self.size
 
+    def set_position(self, x,y):
+        '''
+        Changes position of Ball object (animation of ball)
+
+        x (int): Integer defining the movement direction on x axis
+        y (int): Integer defining the movement direction on y axis
+
+        Changes attribute: self.position
+        '''
+        new_x = self.position[0]+x
+        new_y = self.position[1]+y
+        self.position = (new_x,new_y)
+
     def get_position(self):
         '''
         Get start position of Ball object
