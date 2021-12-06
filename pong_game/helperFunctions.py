@@ -1,3 +1,6 @@
+# Import required packages
+import random
+
 # Define a function to control movement of ball
 def ball_movement(x_direction, y_direction, width, height, ball):
     '''
@@ -31,9 +34,21 @@ def ball_movement(x_direction, y_direction, width, height, ball):
     elif ball.get_position()[0] - ball.get_size() > width:
         # Initialize ball a midpoint again
         ball.set_back()
+        #  New ball direction
+        x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
+        y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
 
         return x_direction, y_direction
 
+    # If ball touches left edge
+    elif ball.get_position()[0] + ball.get_size() < 0:
+        # Initialize ball a midpoint again
+        ball.set_back()
+        #  New ball direction
+        x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
+        y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
+
+        return x_direction, y_direction
 
     # If nothing of the above happens
     else:
