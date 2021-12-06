@@ -1,5 +1,6 @@
 # Import packages
 import pygame
+import random
 
 # Import modules
 from parameters import *
@@ -14,9 +15,9 @@ left_paddle = PaddleLeft(BLUE)
 right_paddle = PaddleRight(BLUE)
 ball = Ball(RED)
 
-# Create movement direction of ball
-x_direction = 4
-y_direction = 4
+# Create random movement direction of ball
+x_direction = random.sample([1, -1], 1)[0]  # Randomly define movement to left or right
+y_direction = random.uniform(-1, 1)  # Ball moves with maximal slope of 1
 
 # Initalize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -62,7 +63,7 @@ while running:
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
 
     # Define refresh time
-    clock.tick(60)
+    clock.tick(500)
 
     # Flip the display
     pygame.display.flip()
