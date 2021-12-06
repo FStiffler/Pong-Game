@@ -152,6 +152,27 @@ class PaddleLeft(Paddle):
         '''
         return [self.top_left, self.top_right, self.down_right, self.down_left]
 
+    def get_position(self):
+        '''
+        Get current position of paddle
+
+        Returns: self.position
+        '''
+        return self.position
+
+    def set_position(self, paddle_movement):
+        '''
+        Method to set new position of the paddle center and also to update corners of polygon
+
+        Changes: self.position, self.top_left, self.top_right, self.down_right, self.down_left
+        '''
+        new_y = self.position[1]+paddle_movement
+        self.position = [PAD_WIDTH_HALF + 0.01 * WIDTH, new_y]
+        self.top_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
+        self.top_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] + PAD_HEIGHT_HALF)
+        self.down_right = (self.position[0] + PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+        self.down_left = (self.position[0] - PAD_WIDTH_HALF, self.position[1] - PAD_HEIGHT_HALF)
+
 
 # Define right paddle child class
 class PaddleRight(Paddle):
