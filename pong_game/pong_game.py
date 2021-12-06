@@ -23,7 +23,7 @@ y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
 command = 0
 
 # Create global score variable
-score = [0,0]
+score = [0, 0]
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -47,7 +47,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Capture commands by user to move paddle (Holding arrows to move paddle)
+        # Capture commands by user to move paddle (User holds arrow key to move paddle)
         elif event.type == pygame.KEYDOWN:
 
             # Capture up command
@@ -58,7 +58,7 @@ while running:
             if event.key == pygame.K_DOWN:
                 command = +1
 
-        # Capturing stop command by user (User released button)
+        # Capturing stop command by user (User released arrow key)
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 command = 0
