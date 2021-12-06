@@ -13,6 +13,10 @@ left_paddle = PaddleLeft(BLUE)
 right_paddle = PaddleRight(BLUE)
 ball = Ball(RED)
 
+# Create movement direction of ball
+x_direction = 4
+y_direction = 4
+
 # Initalize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
 
@@ -22,11 +26,16 @@ pygame.display.set_caption("Pong Game")
 # Define a running variable
 running = True
 
+# Define window refresh parameter
+clock = pygame.time.Clock()
+
 # Run game until user wants to drop out
 while running:
 
-    # Let user end game by clicking on close button
+    # game events
     for event in pygame.event.get():
+
+        # Let user end game by clicking on close button
         if event.type == pygame.QUIT:
             running = False
 
@@ -42,11 +51,17 @@ while running:
     # Draw the ball at center of field
     pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
 
+    # Move ball
+    ball.set_position(x_direction, y_direction)
+
     # Draw paddle on the left
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
 
     # Draw paddle on the right
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
+
+    # Define refresh time
+    clock.tick(60)
 
     # Flip the display
     pygame.display.flip()
