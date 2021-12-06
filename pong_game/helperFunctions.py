@@ -55,15 +55,32 @@ def ball_movement(x_direction, y_direction, width, height, ball):
         return x_direction, y_direction
 
 # Define a function to control movement of paddle
-def paddle_movement(command, left_paddle):
+def paddle_movement(command, height, paddle):
     '''
-    paddle_movement (int): Integer defining the movement direction on x axis
+    command (int): Integer defining the movement direction on x axis
+    height (int): Defines the height of the playing window
+    paddle (Paddle): The paddle object of class Paddle
 
     Returns:
-    paddle_movement (int): Integer defining the movement after command was executed
+    command (int): Integer defining the movement after command was executed
     '''
 
     # New Paddle Position
-    left_paddle.set_position(command)
+    paddle.set_position(command)
+
+    # get height of top left corner
+    top_left_height = paddle.get_polygon()[0][1]
+
+    # get height of down left corner
+    down_left_height = paddle.get_polygon()[3][1]
+
+    # Stop upward movement when upper edge is touched
+    if top_left_height == height:
+        command = 0
+
+    # Stop upward movement when upper edge is touched
+    if down_left_height == 0:
+        command = 0
 
     return command
+

@@ -60,9 +60,6 @@ while running:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 command = 0
 
-
-
-
     # Define color of background
     screen.fill(BLACK)
 
@@ -82,7 +79,7 @@ while running:
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
 
     # Move paddle based on captured movement command of user
-    command = paddle_movement(command, left_paddle)
+    command = paddle_movement(command, HEIGHT, left_paddle)
 
     # Draw paddle on the right
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
