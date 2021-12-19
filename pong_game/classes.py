@@ -56,6 +56,19 @@ class Ball(object):
         '''
         return self.size
 
+    def set_position(self, x, y):
+        '''
+        Changes position of Ball object (animation of ball)
+
+        x (int): Integer defining the movement direction on x axis
+        y (int): Integer defining the movement direction on y axis
+
+        Changes attribute: self.position
+        '''
+        new_x = self.position[0]+x
+        new_y = self.position[1]+y
+        self.position = (new_x, new_y)
+
     def get_position(self):
         '''
         Get start position of Ball object
@@ -63,6 +76,14 @@ class Ball(object):
         Returns: self.position
         '''
         return self.position
+
+    def set_back(self):
+        '''
+        Set Ball object back to start position
+
+        Returns: self.position
+        '''
+        self.position = (WIDTH // 2, HEIGHT // 2)
 
 
 # Define parent class for paddles
@@ -131,6 +152,35 @@ class PaddleLeft(Paddle):
         '''
         return [self.top_left, self.top_right, self.down_right, self.down_left]
 
+    def get_position(self):
+        '''
+        Get current position of paddle
+
+        Returns: self.position
+        '''
+        return self.position
+
+    def set_position(self, paddle_movement):
+        '''
+        Method to set new position of the paddle center and also to update corners of polygon
+
+        Changes: self.position, self.top_left, self.top_right, self.down_right, self.down_left
+        '''
+        # Calculate where new position would be and the according polygon shape
+        new_y = self.position[1]+paddle_movement
+        new_position = [PAD_WIDTH_HALF + 0.01 * WIDTH, new_y]
+        new_top_left = (new_position[0] - PAD_WIDTH_HALF, new_position[1] + PAD_HEIGHT_HALF)
+        new_top_right = (new_position[0] + PAD_WIDTH_HALF, new_position[1] + PAD_HEIGHT_HALF)
+        new_down_right = (new_position[0] + PAD_WIDTH_HALF, new_position[1] - PAD_HEIGHT_HALF)
+        new_down_left = (new_position[0] - PAD_WIDTH_HALF, new_position[1] - PAD_HEIGHT_HALF)
+
+        # Only recalculate polygon values, when new position does not cause polygon to penetrate edge
+        if new_top_left[1] <= HEIGHT and new_down_left[1] >= 0:
+            self.position = new_position
+            self.top_left = new_top_left
+            self.top_right = new_top_right
+            self.down_left = new_down_left
+            self.down_right = new_down_right
 
 # Define right paddle child class
 class PaddleRight(Paddle):
