@@ -1,6 +1,7 @@
 # Import required packages
 import random
 
+
 # Define collision function
 def collision(left_paddle, ball):
     '''
@@ -13,17 +14,20 @@ def collision(left_paddle, ball):
 
     # Define object position
     ball_position = ball.get_position()
-    top_position = left_paddle.top_right[1]
-    down_position = left_paddle.down_right[1]
+    ball_radius = ball.get_size()
+    paddle_top_position = left_paddle.top_right[1]
+    paddle_down_position = left_paddle.down_right[1]
+    paddle_right_position = left_paddle.down_right[0]
 
     # Return True if collision has occured
-    if ball_position[0]<=30 and \
-            ball_position[1] in range(top_position, down_position, 1):
+    if ball_position[0] - ball_radius <= paddle_right_position and \
+            paddle_down_position <= ball_position[1] <= paddle_top_position:
         return True
 
     # Return False otherwise
     else:
         return False
+
 
 # Define a function to control movement of ball
 def ball_movement(x_direction, y_direction, width, height, ball, score, left_paddle):
