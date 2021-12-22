@@ -1,9 +1,32 @@
 # Import required packages
 import random
 
+# Define collision function
+def collision(left_paddle, ball):
+    '''
+    ball (Ball): The ball object of class Ball
+    left_paddle (PaddleLeft): The left paddle object of class Paddle
+
+    Returns:
+    Boolean value for collision
+    '''
+
+    # Define object position
+    ball_position = ball.get_position()
+    top_position = left_paddle.top_right[1]
+    down_position = left_paddle.down_right[1]
+
+    # Return True if collision has occured
+    if ball_position[0]<=30 and \
+            ball_position[1] in range(top_position, down_position, 1):
+        return True
+
+    # Return False otherwise
+    else:
+        return False
 
 # Define a function to control movement of ball
-def ball_movement(x_direction, y_direction, width, height, ball, score):
+def ball_movement(x_direction, y_direction, width, height, ball, score, left_paddle):
     '''
     x_direction (int): Integer defining the movement direction on x axis
     y_direction (int): Integer defining the movement direction on y axis
@@ -54,6 +77,12 @@ def ball_movement(x_direction, y_direction, width, height, ball, score):
         # Increase score of right player
         score[1] += 1
 
+        return x_direction, y_direction, score
+
+    # If ball touches left paddle
+    elif collision(left_paddle, ball):
+        # invert x movement
+        x_direction = x_direction * -1
         return x_direction, y_direction, score
 
     # If nothing of the above happens
