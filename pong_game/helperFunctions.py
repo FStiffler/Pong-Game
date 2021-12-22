@@ -95,10 +95,10 @@ def ball_movement(
 
         return x_direction, y_direction, score
 
-    # If ball touches left paddle
+    # If ball touches a paddle
     elif collision(left_paddle, right_paddle, ball):
         # invert x movement
-        x_direction = x_direction * -1
+        x_direction = x_direction * -1.25
         return x_direction, y_direction, score
 
     # If nothing of the above happens
