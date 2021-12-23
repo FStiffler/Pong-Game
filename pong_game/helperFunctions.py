@@ -135,3 +135,37 @@ def paddle_movement(command, height, paddle):
         command = 0
 
     return command
+
+# Create an AI to decide on how to move the paddle
+def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
+    '''
+    x_direction (int): Integer defining the movement direction of the ball on x axis
+    y_direction (int): Integer defining the movement direction of the ball on y axis
+
+    Returns:
+    ai_command (int): Command of AI to move paddle up or down
+    '''
+
+    # If ball is moving to the right
+    if x_direction > 0:
+
+        # Get current ball position
+        position = ball.get_position()
+
+        # Calculate final contact point of ball with right edge
+        contact_point = position[1] + (y_direction/x_direction) * (WIDTH - position[0])
+
+        # If y position of paddle to high
+        if right_paddle.position[1] > contact_point:
+            ai_command = -1
+
+        # If y position of paddle to low
+        elif right_paddle.position[1] < contact_point:
+            ai_command = 1
+
+        # If position correct
+        else:
+            ai_command = 0
+
+        return ai_command
+
