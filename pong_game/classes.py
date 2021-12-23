@@ -231,7 +231,7 @@ class PaddleRight(Paddle):
         '''
         # Calculate where new position would be and the according polygon shape
         new_y = self.position[1]+paddle_movement
-        new_position = [PAD_WIDTH_HALF + 0.01 * WIDTH, new_y]
+        new_position = [WIDTH - PAD_WIDTH_HALF - 0.01 * WIDTH, new_y]
         new_top_left = (new_position[0] - PAD_WIDTH_HALF, new_position[1] + PAD_HEIGHT_HALF)
         new_top_right = (new_position[0] + PAD_WIDTH_HALF, new_position[1] + PAD_HEIGHT_HALF)
         new_down_right = (new_position[0] + PAD_WIDTH_HALF, new_position[1] - PAD_HEIGHT_HALF)
