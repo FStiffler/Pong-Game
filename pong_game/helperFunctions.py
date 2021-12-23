@@ -167,5 +167,10 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
         else:
             ai_command = 0
 
-        return ai_command
+    # If ball is moving to the left
+    if x_direction < 0:
+        ai_command = 0
+
+    return ai_command
+
 
