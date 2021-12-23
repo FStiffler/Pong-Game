@@ -97,8 +97,19 @@ def ball_movement(
 
     # If ball touches a paddle
     elif collision(left_paddle, right_paddle, ball):
-        # invert x movement
-        x_direction = x_direction * -1.25
+
+        # If ball speed is still below maximal speed
+        if abs(x_direction) < 5:
+
+            # invert x movement with multiplier
+            x_direction = x_direction * -1.25
+
+        # If ball speed is above maximal speed
+        elif abs(x_direction) > 5:
+
+            # invert x movement without multiplier
+            x_direction = x_direction * -1
+
         return x_direction, y_direction, score
 
     # If nothing of the above happens
