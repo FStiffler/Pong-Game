@@ -215,6 +215,35 @@ class PaddleRight(Paddle):
         '''
         return [self.top_left, self.top_right, self.down_right, self.down_left]
 
+    def get_position(self):
+        '''
+        Get current position of paddle
+
+        Returns: self.position
+        '''
+        return self.position
+
+    def set_position(self, paddle_movement):
+        '''
+        Method to set new position of the paddle center and also to update corners of polygon
+
+        Changes: self.position, self.top_left, self.top_right, self.down_right, self.down_left
+        '''
+        # Calculate where new position would be and the according polygon shape
+        new_y = self.position[1]+paddle_movement
+        new_position = [PAD_WIDTH_HALF + 0.01 * WIDTH, new_y]
+        new_top_left = (new_position[0] - PAD_WIDTH_HALF, new_position[1] + PAD_HEIGHT_HALF)
+        new_top_right = (new_position[0] + PAD_WIDTH_HALF, new_position[1] + PAD_HEIGHT_HALF)
+        new_down_right = (new_position[0] + PAD_WIDTH_HALF, new_position[1] - PAD_HEIGHT_HALF)
+        new_down_left = (new_position[0] - PAD_WIDTH_HALF, new_position[1] - PAD_HEIGHT_HALF)
+
+        # Only recalculate polygon values, when new position does not cause polygon to penetrate edge
+        if new_top_left[1] <= HEIGHT and new_down_left[1] >= 0:
+            self.position = new_position
+            self.top_left = new_top_left
+            self.top_right = new_top_right
+            self.down_left = new_down_left
+            self.down_right = new_down_right
 
 if __name__ == '__main__':
 
