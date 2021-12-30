@@ -88,6 +88,12 @@ while running:
     # Draw paddle on the right
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
 
+    # Return AI command for right paddle movement
+    ai_command = ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction)
+
+    # Move paddle based on proposed movement command of AI
+    ai_command = paddle_movement(ai_command, HEIGHT, right_paddle)
+
     # Define refresh time
     clock.tick(300)
 
