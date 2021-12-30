@@ -219,5 +219,5 @@ class PaddleRight(Paddle):
 if __name__ == '__main__':
 
     ball = Ball(WHITE)
-    left = PaddleLeft(WHITE)
-    right = PaddleRight(WHITE)
+    left_paddle = PaddleLeft(WHITE)
+    right_paddle = PaddleRight(WHITE)
