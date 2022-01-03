@@ -1,6 +1,8 @@
 # Import required packages
 import random
 
+# Import Parameters
+from parameters import *
 
 # Define collision function
 def collision(left_paddle, right_paddle, ball):
@@ -97,19 +99,24 @@ def ball_movement(
 
     # If ball touches a paddle
     elif collision(left_paddle, right_paddle, ball):
+     
 
         # If ball speed is still below maximal speed
         if abs(x_direction) < 5:
 
             # invert x movement with multiplier
             x_direction = x_direction * -1.25
+           
 
         # If ball speed is above maximal speed
         elif abs(x_direction) > 5:
 
             # invert x movement without multiplier
             x_direction = x_direction * -1
-
+            
+        ball.set_color(list(np.random.choice(range(256), size=3)))
+        left_paddle.set_color(list(np.random.choice(range(256), size=3)))
+        right_paddle.set_color(list(np.random.choice(range(256), size=3)))
         return x_direction, y_direction, score
 
     # If nothing of the above happens
@@ -140,11 +147,14 @@ def paddle_movement(command, height, paddle):
     # Stop upward movement when upper edge is touched
     if top_left_height == height:
         command = 0
+        paddle.set_color(RANDOM)
+        
 
     # Stop upward movement when upper edge is touched
     if down_left_height == 0:
         command = 0
-
+        paddle.set_color(RANDOM)
+     
     return command
 
 # Create an AI to decide on how to move the paddle
@@ -176,7 +186,7 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
 
         # If position correct
         else:
-            ai_command = 0
+            ai_command = 10
 
     # If ball is moving to the left
     if x_direction < 0:

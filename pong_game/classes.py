@@ -223,6 +223,7 @@ class PaddleRight(Paddle):
         '''
         return self.position
 
+
     def set_position(self, paddle_movement):
         '''
         Method to set new position of the paddle center and also to update corners of polygon
