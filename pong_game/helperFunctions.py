@@ -4,6 +4,7 @@ import random
 # Import Parameters
 from parameters import *
 
+
 # Define collision function
 def collision(left_paddle, right_paddle, ball):
     '''
@@ -99,7 +100,6 @@ def ball_movement(
 
     # If ball touches a paddle
     elif collision(left_paddle, right_paddle, ball):
-     
 
         # If ball speed is still below maximal speed
         if abs(x_direction) < 5:
@@ -107,7 +107,7 @@ def ball_movement(
             # invert x movement with multiplier
             x_direction = x_direction * -1.25
             y_direction = y_direction * 1.25
-           
+
 
         # If ball speed is above maximal speed
         elif abs(x_direction) > 5:
@@ -115,10 +115,10 @@ def ball_movement(
             # invert x movement without multiplier
             x_direction = x_direction * -1
             y_direction = y_direction * 1
-            
-        ball.set_color(list(np.random.choice(range(256), size=3)))
-        left_paddle.set_color(list(np.random.choice(range(256), size=3)))
-        right_paddle.set_color(list(np.random.choice(range(256), size=3)))
+
+        ball.set_color(random.sample(range(0, 256, 1), 3))
+        left_paddle.set_color(random.sample(range(0, 256, 1), 3))
+        right_paddle.set_color(random.sample(range(0, 256, 1), 3))
         return x_direction, y_direction, score
 
     # If nothing of the above happens
@@ -149,15 +149,13 @@ def paddle_movement(command, height, paddle):
     # Stop upward movement when upper edge is touched
     if top_left_height == height:
         command = 0
-      
-        
 
     # Stop upward movement when upper edge is touched
     if down_left_height == 0:
         command = 0
-       
-     
+
     return command
+
 
 # Create an AI to decide on how to move the paddle
 def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
@@ -176,7 +174,7 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
         position = ball.get_position()
 
         # Calculate final contact point of ball with right edge
-        contact_point = position[1] + (y_direction/x_direction) * (WIDTH - position[0])
+        contact_point = position[1] + (y_direction / x_direction) * (WIDTH - position[0])
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:
@@ -195,5 +193,3 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
         ai_command = 0
 
     return ai_command
-
-
