@@ -178,11 +178,11 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:
-            ai_command = -5
+            ai_command = -3
 
         # If y position of paddle to low
         elif right_paddle.position[1] < contact_point:
-            ai_command = 5
+            ai_command = 3
 
         # If position correct
         else:
