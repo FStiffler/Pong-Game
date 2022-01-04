@@ -147,13 +147,13 @@ def paddle_movement(command, height, paddle):
     # Stop upward movement when upper edge is touched
     if top_left_height == height:
         command = 0
-        paddle.set_color(RANDOM)
+      
         
 
     # Stop upward movement when upper edge is touched
     if down_left_height == 0:
         command = 0
-        paddle.set_color(RANDOM)
+       
      
     return command
 
