@@ -14,6 +14,9 @@ PAD_WIDTH = 20
 PAD_HEIGHT = 200
 PAD_WIDTH_HALF = PAD_WIDTH // 2
 PAD_HEIGHT_HALF = PAD_HEIGHT // 2
+OPPONENT_HARD = 100
+OPPONENT_ADVANCED = 250
+OPPONENT_EASY = 500
 
 # Define global variables
 x_direction = random.sample([1, -1], 1)[0]*1.5  # Initial horizontal movement (left or right)

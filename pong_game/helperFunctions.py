@@ -88,7 +88,7 @@ def ball_movement(
         # get score time
         score_time = pygame.time.get_ticks()
         # Increase score of right player
-        score[1] += 1
+        score[0] += 1
         x_direction = random.sample([1, -1], 1)[0] * 1.5  # Horizontal movement (left or right)
         y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0] * 1.5  # Vertical movement (down or up)
 
@@ -168,8 +168,10 @@ def paddle_movement(command, height, paddle):
 
 
 # Create an AI to decide on how to move the paddle
-def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
+def ai_movement(right_paddle, ball, x_direction, y_direction):
     '''
+    right_paddle (PaddleRight): Right paddle Object
+    ball (Ball): Ball object
     x_direction (int): Integer defining the movement direction of the ball on x axis
     y_direction (int): Integer defining the movement direction of the ball on y axis
 
@@ -185,6 +187,9 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
 
         # Calculate final contact point of ball with right edge
         contact_point = position[1] + (y_direction / x_direction) * (WIDTH - position[0])
+
+        # Add random movement to AI to prevent it from being to strong
+        contact_point += random.normalvariate(0, OPPONENT_ADVANCED)
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:
