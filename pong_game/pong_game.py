@@ -16,8 +16,8 @@ right_paddle = PaddleRight(BLUE)
 ball = Ball(RED)
 
 # Create random movement direction of ball
-x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
-y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
+x_direction = random.sample([1, -1], 1)[0]*1.5  # Horizontal movement (left or right)
+y_direction = random.sample([random.uniform(-1, -0.5) , random.uniform(0.5, 1)],1)[0] *1.5 # Vertical movement (down or up)
 
 # Create global paddle movement variable
 command = 0
@@ -52,11 +52,11 @@ while running:
 
             # Capture up command
             if event.key == pygame.K_UP:
-                command = -1
+                command = -5
 
             # Capture down command
             if event.key == pygame.K_DOWN:
-                command = +1
+                command = +5
 
         # Capturing stop command by user (User released arrow key)
         elif event.type == pygame.KEYUP:

@@ -106,6 +106,7 @@ def ball_movement(
 
             # invert x movement with multiplier
             x_direction = x_direction * -1.25
+            y_direction = y_direction * 1.25
            
 
         # If ball speed is above maximal speed
@@ -113,6 +114,7 @@ def ball_movement(
 
             # invert x movement without multiplier
             x_direction = x_direction * -1
+            y_direction = y_direction * 1
             
         ball.set_color(list(np.random.choice(range(256), size=3)))
         left_paddle.set_color(list(np.random.choice(range(256), size=3)))
@@ -178,15 +180,15 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:
-            ai_command = -1
+            ai_command = -5
 
         # If y position of paddle to low
         elif right_paddle.position[1] < contact_point:
-            ai_command = 1
+            ai_command = 5
 
         # If position correct
         else:
-            ai_command = 10
+            ai_command = 0
 
     # If ball is moving to the left
     if x_direction < 0:
