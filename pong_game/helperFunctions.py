@@ -45,7 +45,8 @@ def collision(left_paddle, right_paddle, ball):
 
 # Define a function to control movement of ball
 def ball_movement(
-        x_direction, y_direction, width, height, ball, score, left_paddle, right_paddle, score_time):
+        x_direction, y_direction, width, height, ball, score, left_paddle, right_paddle, score_time,
+        pong_sound, goal_sound, received_sound):
     '''
     x_direction (int): Integer defining the movement direction on x axis
     y_direction (int): Integer defining the movement direction on y axis
@@ -56,6 +57,7 @@ def ball_movement(
     left_paddle (PaddleLeft): The left paddle object of class Paddle
     right_paddle (PaddleRight): The right paddle object of class Paddle
     score_time (double or None): Time when last goal was scored
+    pong_sound (WAV): Sound when ball hits paddle
 
     Returns:
     y_direction (int): Movement direction on y-axis after checking all conditions
@@ -81,6 +83,8 @@ def ball_movement(
 
     # If ball touches right edge
     elif ball.get_position()[0] - ball.get_size() > width:
+        # score sound
+        pygame.mixer.Sound.play(goal_sound)
         # get score time
         score_time = pygame.time.get_ticks()
         # Increase score of right player
@@ -92,6 +96,8 @@ def ball_movement(
 
     # If ball touches left edge
     elif ball.get_position()[0] + ball.get_size() < 0:
+        # score sound
+        pygame.mixer.Sound.play(received_sound)
         # get score time
         score_time = pygame.time.get_ticks()
         # Increase score of right player
@@ -122,6 +128,7 @@ def ball_movement(
         ball.set_color(random.sample(range(0, 256, 1), 3))
         left_paddle.set_color(random.sample(range(0, 256, 1), 3))
         right_paddle.set_color(random.sample(range(0, 256, 1), 3))
+        pygame.mixer.Sound.play(pong_sound)
         return x_direction, y_direction, score, score_time
 
     # If nothing of the above happens
