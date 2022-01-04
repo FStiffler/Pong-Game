@@ -2,6 +2,8 @@
 import random
 
 # Import Parameters
+import pygame.time
+
 from parameters import *
 
 
@@ -43,7 +45,7 @@ def collision(left_paddle, right_paddle, ball):
 
 # Define a function to control movement of ball
 def ball_movement(
-        x_direction, y_direction, width, height, ball, score, left_paddle, right_paddle):
+        x_direction, y_direction, width, height, ball, score, left_paddle, right_paddle, score_time):
     '''
     x_direction (int): Integer defining the movement direction on x axis
     y_direction (int): Integer defining the movement direction on y axis
@@ -53,10 +55,13 @@ def ball_movement(
     score (list): A list with two elements, the score of left and right players
     left_paddle (PaddleLeft): The left paddle object of class Paddle
     right_paddle (PaddleRight): The right paddle object of class Paddle
+    score_time (double or None): Time when last goal was scored
 
     Returns:
     y_direction (int): Movement direction on y-axis after checking all conditions
     x_direction (int): Movement direction on x-axis after checking all conditions
+    score (list): Contains the scores of each player
+    score_time (double or None): Time when last goal was scored. 
     '''
 
     # New Ball position
@@ -66,37 +71,35 @@ def ball_movement(
     if ball.get_position()[1] + ball.get_size() > height:
         # invert y movement
         y_direction = y_direction * -1
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If ball touches lower edge
     elif ball.get_position()[1] - ball.get_size() < 0:
         # invert y movement
         y_direction = y_direction * -1
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If ball touches right edge
     elif ball.get_position()[0] - ball.get_size() > width:
-        # Initialize ball a midpoint again
-        ball.set_back()
-        #  New ball direction
-        x_direction = random.sample([1, -1], 1)[0]*1.5  # Horizontal movement (left or right)
-        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0]*1.5  # Vertical movement (down or up)
-        # Increase score of left player
-        score[0] += 1
+        # get score time
+        score_time = pygame.time.get_ticks()
+        # Increase score of right player
+        score[1] += 1
+        x_direction = random.sample([1, -1], 1)[0] * 1.5  # Horizontal movement (left or right)
+        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0] * 1.5  # Vertical movement (down or up)
 
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If ball touches left edge
     elif ball.get_position()[0] + ball.get_size() < 0:
-        # Initialize ball a midpoint again
-        ball.set_back()
-        #  New ball direction
-        x_direction = random.sample([1, -1], 1)[0]*1.5  # Horizontal movement (left or right)
-        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0]*1.5  # Vertical movement (down or up)
+        # get score time
+        score_time = pygame.time.get_ticks()
         # Increase score of right player
         score[1] += 1
+        x_direction = random.sample([1, -1], 1)[0] * 1.5  # Horizontal movement (left or right)
+        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0] * 1.5  # Vertical movement (down or up)
 
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If ball touches a paddle
     elif collision(left_paddle, right_paddle, ball):
@@ -119,11 +122,11 @@ def ball_movement(
         ball.set_color(random.sample(range(0, 256, 1), 3))
         left_paddle.set_color(random.sample(range(0, 256, 1), 3))
         right_paddle.set_color(random.sample(range(0, 256, 1), 3))
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If nothing of the above happens
     else:
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
 
 # Define a function to control movement of paddle

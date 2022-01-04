@@ -1,4 +1,5 @@
 # Import Parameters
+import pygame.time
 from parameters import *
 
 # Define Ball class
@@ -77,13 +78,24 @@ class Ball(object):
         '''
         return self.position
 
-    def set_back(self):
+    def set_back(self, score_time):
         '''
-        Set Ball object back to start position
+        Set Ball object back to start position and keep ball at position until cool down phase is over
 
-        Returns: self.position
+        Returns: self.position, score_time
         '''
         self.position = (WIDTH // 2, HEIGHT // 2)
+        current_time = pygame.time.get_ticks()
+
+        # As soon as cooldown phase is over
+        if current_time - score_time > 1200:
+
+            # If time is up, reset score time which releases the ball
+            score_time = None
+
+        return score_time
+
+
 
 
 # Define parent class for paddles

@@ -63,8 +63,12 @@ while running:
     pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
 
     # Move ball
-    x_direction, y_direction, score = \
-        ball_movement(x_direction, y_direction, WIDTH, HEIGHT, ball, score, left_paddle, right_paddle)
+    x_direction, y_direction, score, score_time = \
+        ball_movement(x_direction, y_direction, WIDTH, HEIGHT, ball, score, left_paddle, right_paddle, score_time)
+
+    # In case of goal start timer before ball is released once again
+    if score_time:
+        score_time = ball.set_back(score_time)
 
     # Draw paddle on the left
     pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
