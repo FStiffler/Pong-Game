@@ -79,8 +79,8 @@ def ball_movement(
         # Initialize ball a midpoint again
         ball.set_back()
         #  New ball direction
-        x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
-        y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
+        x_direction = random.sample([1, -1], 1)[0]*1.5  # Horizontal movement (left or right)
+        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0]*1.5  # Vertical movement (down or up)
         # Increase score of left player
         score[0] += 1
 
@@ -91,8 +91,8 @@ def ball_movement(
         # Initialize ball a midpoint again
         ball.set_back()
         #  New ball direction
-        x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
-        y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
+        x_direction = random.sample([1, -1], 1)[0]*1.5  # Horizontal movement (left or right)
+        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0]*1.5  # Vertical movement (down or up)
         # Increase score of right player
         score[1] += 1
 
