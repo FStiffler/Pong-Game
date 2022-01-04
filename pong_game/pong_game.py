@@ -69,7 +69,7 @@ while running:
 
     # Move ball
     x_direction, y_direction, score, score_time = \
-        ball_movement(x_direction, y_direction, WIDTH, HEIGHT, ball, score, left_paddle, right_paddle,
+        ball_movement(x_direction, y_direction, ball, score, left_paddle, right_paddle,
                       score_time, pong_sound, goal_sound, received_sound)
 
     # In case of goal start timer before ball is released once again

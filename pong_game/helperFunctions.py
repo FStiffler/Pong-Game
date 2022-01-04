@@ -45,7 +45,7 @@ def collision(left_paddle, right_paddle, ball):
 
 # Define a function to control movement of ball
 def ball_movement(
-        x_direction, y_direction, width, height, ball, score, left_paddle, right_paddle, score_time,
+        x_direction, y_direction, ball, score, left_paddle, right_paddle, score_time,
         pong_sound, goal_sound, received_sound):
     '''
     x_direction (int): Integer defining the movement direction on x axis
@@ -70,7 +70,7 @@ def ball_movement(
     ball.set_position(x_direction, y_direction)
 
     # If ball touches upper edge
-    if ball.get_position()[1] + ball.get_size() > height:
+    if ball.get_position()[1] + ball.get_size() > HEIGHT:
         # invert y movement
         y_direction = y_direction * -1
         return x_direction, y_direction, score, score_time
@@ -82,7 +82,7 @@ def ball_movement(
         return x_direction, y_direction, score, score_time
 
     # If ball touches right edge
-    elif ball.get_position()[0] - ball.get_size() > width:
+    elif ball.get_position()[0] - ball.get_size() > WIDTH:
         # score sound
         pygame.mixer.Sound.play(goal_sound)
         # get score time
