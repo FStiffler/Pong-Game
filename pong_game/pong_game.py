@@ -7,32 +7,19 @@ from parameters import *
 from classes import *
 from helperFunctions import *
 
-# Initialize pygame
-pygame.init()
-
 # Create objects from pre-defined classes
 left_paddle = PaddleLeft(BLUE)
 right_paddle = PaddleRight(BLUE)
 ball = Ball(RED)
 
-# Create random movement direction of ball
-x_direction = random.sample([1, -1], 1)[0]*1.5  # Horizontal movement (left or right)
-y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0]*1.5 # Vertical movement (down or up)
-
-# Create global paddle movement variable
-command = 0
-
-# Create global score variable
-score = [0, 0]
+# Initialize pygame
+pygame.init()
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
 
 # Set title
 pygame.display.set_caption("Pong Game")
-
-# Define a running variable
-running = True
 
 # Define window refresh parameter
 clock = pygame.time.Clock()
