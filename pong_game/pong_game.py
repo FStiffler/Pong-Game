@@ -129,7 +129,6 @@ while running:
                     # Turn of difficulty selection screen
                     choose_difficulty = False
 
-
     # Animation #####
 
     # As long as game not over
@@ -171,6 +170,7 @@ while running:
         # Print Message
         write_message(screen, "YOU LOST!", 100, -160, WHITE)
         write_message(screen, "Click [ENTER] to play again!", 20, 150, WHITE)
+        write_message(screen, "Click [BACKSPACE] to change difficulty ", 20, 190, WHITE)
 
 
 
@@ -192,6 +192,15 @@ while running:
 
                     # Restart game
                     playing = True
+
+                # Capture command of enter button
+                if event.key == pygame.K_BACKSPACE:
+
+                    # Reset score
+                    score = [0, 0]
+
+                    # Restart game
+                    choose_difficulty = True
 
     # If player wins:
     if score[0] == POINTS_TO_WIN:
@@ -202,6 +211,7 @@ while running:
         # Print Message
         write_message(screen, "YOU WON!", 100, -160, WHITE)
         write_message(screen, "Click [ENTER] to play again", 20, 150, WHITE)
+        write_message(screen, "Click [BACKSPACE] to change difficulty ", 20, 190, WHITE)
 
         # Event key
         for event in pygame.event.get():
@@ -220,6 +230,14 @@ while running:
 
                     # Restart game
                     playing = True
+
+                # Capture command of enter button
+                if event.key == pygame.K_BACKSPACE:
+                    # Reset score
+                    score = [0, 0]
+
+                    # Restart game
+                    choose_difficulty = True
 
     # Define refresh time
     clock.tick(300)
