@@ -30,6 +30,9 @@ mixer.music.play()
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
 
+# Set background image
+background_image = pygame.image.load("background.jpg").convert()
+
 # Set title
 pygame.display.set_caption("Pong Game")
 
@@ -63,15 +66,9 @@ while running:
                 command = 0
 
     # Define color of background
-    screen.fill(BLACK)
+    screen.blit(background_image, [0, 0])
 
     # Drawing ######
-
-    # Draw a center line
-    pygame.draw.line(screen, WHITE, start_pos=(WIDTH // 2, HEIGHT), end_pos=(WIDTH // 2, 0))
-
-    # Draw circle in in middle
-    pygame.draw.circle(screen, WHITE, center=(WIDTH // 2, HEIGHT // 2), radius=WIDTH * 0.1, width=1)
 
     # Draw the ball
     pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
@@ -160,8 +157,8 @@ while running:
         # Print Message
         message_font_main = pygame.font.SysFont("Comic Sans MS", 100)
         message_font_minor = pygame.font.SysFont("Comic Sans MS", 20)
-        main_message = message_font_main.render("You Won!", 1, WHITE)
-        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, WHITE)
+        main_message = message_font_main.render("You Won!", 1, BLACK)
+        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, BLACK)
         main_message_rect = main_message.get_rect()
         minor_message_rect = minor_message.get_rect()
         main_message_rect.center = (WIDTH / 2, HEIGHT / 2)
