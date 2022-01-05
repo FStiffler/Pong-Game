@@ -88,7 +88,7 @@ class Ball(object):
         current_time = pygame.time.get_ticks()
 
         # As soon as cooldown phase is over
-        if current_time - score_time > 1500:
+        if current_time - score_time > COOLDOWN:
 
             # If time is up, reset score time which releases the ball
             score_time = None

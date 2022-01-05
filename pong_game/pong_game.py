@@ -72,18 +72,53 @@ while running:
     # Define color of background
     screen.blit(background_image, [0, 0])
 
-    # Drawing ######
+    # Welcome screen
+    if start:
 
-    # Draw the ball
-    pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
+        # Print Message
+        write_message(screen, "WELCOME", 100, -180, WHITE)
+        write_message(screen, "TO THE UNIVERSE OF PONG", 50, 160, WHITE)
+        write_message(screen, "Click [ENTER] to start the game", 20, 220, WHITE)
 
-    # Draw paddle on the left
-    pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
+        # Event key
+        for event in pygame.event.get():
 
-    # Draw paddle on the right
-    pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
+            # Let user end game by clicking on close button
+            if event.type == pygame.QUIT:
+                running = False
 
-    # If completly new game
+            # Capture commands by user to move paddle (User holds arrow key to move paddle)
+            if event.type == pygame.KEYDOWN:
+
+                # Capture command of enter button
+                if event.key == pygame.K_RETURN:
+                    # stop this screen from showing up again
+                    start = False
+                    # Make sure to enter the difficulty screen next
+                    choose_difficulty = True
+
+    # Drawing ####
+
+    # Start drawing after start screen
+    if start == False and choose_difficulty == False:
+
+        # Draw the ball
+        pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
+
+        # Draw paddle on the left
+        pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
+
+        # Draw paddle on the right
+        pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
+
+        # Score Board ####
+        score_font = pygame.font.SysFont("Comic Sans MS", 20)
+        score1 = score_font.render("Score: " + str(score[0]), 1, WHITE)
+        screen.blit(score1, (0.25 * WIDTH - 30, 10))
+        score2 = score_font.render("Score: " + str(score[1]), 1, WHITE)
+        screen.blit(score2, (0.75 * WIDTH - 30, 10))
+
+    # Choosing difficulty screen
     if playing == False and choose_difficulty == True:
 
         # Print Message
@@ -151,13 +186,6 @@ while running:
 
         # Move paddle based on proposed movement command of AI
         ai_command = paddle_movement(ai_command, HEIGHT, right_paddle)
-
-    # Score Board ####
-    score_font= pygame.font.SysFont("Comic Sans MS", 20)
-    score1 = score_font.render("Score: " + str(score[0]), 1, WHITE)
-    screen.blit(score1, (0.25*WIDTH-30, 10))
-    score2 = score_font.render("Score: " + str(score[1]), 1, WHITE)
-    screen.blit(score2, (0.75*WIDTH-30, 10))
 
     # When game is over ####
 

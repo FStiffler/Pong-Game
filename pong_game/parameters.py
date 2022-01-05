@@ -7,7 +7,6 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-
 # Define constants
 WIDTH = 1024
 HEIGHT = 576
@@ -19,6 +18,7 @@ OPPONENT_HARD = 100
 OPPONENT_ADVANCED = 250
 OPPONENT_EASY = 500
 POINTS_TO_WIN = 2
+COOLDOWN = 1500
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 
 # Define global variables
@@ -30,4 +30,5 @@ score = [0, 0]  # score variable
 score_time = None  # score time variable
 running = True  # Running variable
 playing = False  # Play variable to differentiate between in game and out of game action
-choose_difficulty = True
+choose_difficulty = False  # Variable to enter screen to choose difficulty
+start = True  # Startscreen only showing once when starting the game
