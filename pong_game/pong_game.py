@@ -165,12 +165,27 @@ while running:
         pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
 
         # Score Board ####
+
+        # Score font
         score_font = pygame.font.SysFont("Comic Sans MS", 20)
+
+        # Score player
         score1 = score_font.render("Score: " + str(score[0]), 1, WHITE)
         screen.blit(score1, (0.25 * WIDTH - 50, 10))
+
+        # Score computer
         score2 = score_font.render("Score: " + str(score[1]), 1, WHITE)
         screen.blit(score2, (0.75 * WIDTH - 50, 10))
-        write_message(screen, f'{POINTS_TO_WIN} points to win', 20, -264, WHITE)
+
+        # Game information
+        if difficulty == 100:
+            level = 'Hard'
+        elif difficulty == 250:
+            level = 'Advancaced'
+        elif difficulty == 500:
+            level = 'Easy'
+
+        write_message(screen, f'Points to win: {POINTS_TO_WIN} | Difficulty: {level}', 20, 264, WHITE)
 
     # Animation #####
     if playing:
