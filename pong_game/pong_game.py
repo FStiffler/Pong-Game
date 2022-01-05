@@ -170,8 +170,8 @@ while running:
         # Print Message
         write_message(screen, "YOU LOST!", 100, -160, WHITE)
         write_message(screen, "Click [ENTER] to play again!", 20, 150, WHITE)
-        write_message(screen, "Click [BACKSPACE] to change difficulty ", 20, 190, WHITE)
-
+        write_message(screen, "Click [SPACE] to change difficulty ", 20, 190, WHITE)
+        write_message(screen, "Click [BACKSPACE] to leave game ", 20, 230, WHITE)
 
 
         # Event key
@@ -186,21 +186,22 @@ while running:
 
                 # Capture command of enter button
                 if event.key == pygame.K_RETURN:
-
                     # Reset score
                     score = [0, 0]
-
                     # Restart game
                     playing = True
 
                 # Capture command of enter button
-                if event.key == pygame.K_BACKSPACE:
-
+                if event.key == pygame.K_SPACE:
                     # Reset score
                     score = [0, 0]
-
-                    # Restart game
+                    # Go back to selection screen
                     choose_difficulty = True
+
+                # Capture command of enter button
+                if event.key == pygame.K_BACKSPACE:
+                    # stop game
+                    running = False
 
     # If player wins:
     if score[0] == POINTS_TO_WIN:
@@ -211,7 +212,8 @@ while running:
         # Print Message
         write_message(screen, "YOU WON!", 100, -160, WHITE)
         write_message(screen, "Click [ENTER] to play again", 20, 150, WHITE)
-        write_message(screen, "Click [BACKSPACE] to change difficulty ", 20, 190, WHITE)
+        write_message(screen, "Click [SPACE] to change difficulty ", 20, 190, WHITE)
+        write_message(screen, "Click [BACKSPACE] to leave game ", 20, 230, WHITE)
 
         # Event key
         for event in pygame.event.get():
@@ -227,17 +229,20 @@ while running:
                 if event.key == pygame.K_RETURN:
                     # Reset score
                     score = [0, 0]
-
                     # Restart game
                     playing = True
 
                 # Capture command of enter button
-                if event.key == pygame.K_BACKSPACE:
+                if event.key == pygame.K_SPACE:
                     # Reset score
                     score = [0, 0]
-
-                    # Restart game
+                    # Go back to selection screen
                     choose_difficulty = True
+
+                # Capture command of enter button
+                if event.key == pygame.K_BACKSPACE:
+                    # stop game
+                    running = False
 
     # Define refresh time
     clock.tick(300)
