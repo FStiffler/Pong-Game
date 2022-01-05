@@ -1,5 +1,6 @@
 # Import required packages
 import random
+import pygame
 
 # Import Parameters
 import pygame.time
@@ -224,3 +225,22 @@ def ai_movement(right_paddle, ball, x_direction, y_direction):
         ai_command = 0
 
     return ai_command
+
+# Print Messages to screen
+def write_message(screen, text, size, hposition):
+    '''
+        size (int): Size of message to be written
+        hposition (int): Horizontal position of message
+        text (string): Text to be depicted in message
+
+        Returns:
+        image with message on top of screen
+        '''
+
+    # Print Message
+    message_font = pygame.font.SysFont("Comic Sans MS", size)
+    message = message_font.render(text, 1, WHITE)
+    message_rect = message.get_rect()
+    message_rect.center = (WIDTH / 2, HEIGHT / 2 + hposition)
+    screen.blit(message, message_rect)
+
