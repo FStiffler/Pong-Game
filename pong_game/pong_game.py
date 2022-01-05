@@ -178,11 +178,11 @@ while running:
         screen.blit(score2, (0.75 * WIDTH - 50, 10))
 
         # Game information
-        if difficulty == 100:
+        if difficulty == OPPONENT_HARD:
             level = 'Hard'
-        elif difficulty == 250:
+        elif difficulty == OPPONENT_ADVANCED:
             level = 'Advanced'
-        elif difficulty == 500:
+        elif difficulty == OPPONENT_EASY:
             level = 'Easy'
 
         write_message(screen, f'Points to win: {POINTS_TO_WIN} | Difficulty: {level}', 20, 264, WHITE)
