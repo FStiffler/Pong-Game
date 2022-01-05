@@ -157,8 +157,8 @@ while running:
         # Print Message
         message_font_main = pygame.font.SysFont("Comic Sans MS", 100)
         message_font_minor = pygame.font.SysFont("Comic Sans MS", 20)
-        main_message = message_font_main.render("You Won!", 1, BLACK)
-        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, BLACK)
+        main_message = message_font_main.render("You Won!", 1, WHITE)
+        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, WHITE)
         main_message_rect = main_message.get_rect()
         minor_message_rect = minor_message.get_rect()
         main_message_rect.center = (WIDTH / 2, HEIGHT / 2)
