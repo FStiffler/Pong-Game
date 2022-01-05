@@ -58,21 +58,21 @@ while running:
 
             # Capture up command
             if event.key == pygame.K_UP:
-                command = -3
+                command = -PADDLESPEED
 
             # Capture down command
             if event.key == pygame.K_DOWN:
-                command = +3
+                command = +PADDLESPEED
 
         # Capturing stop command by user (User released arrow key)
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 command = 0
 
-    # Define color of background
+    # Define color of background ####
     screen.blit(background_image, [0, 0])
 
-    # Welcome screen
+    # Welcome screen ####
     if start:
 
         # Print Message
@@ -97,7 +97,7 @@ while running:
                     # Make sure to enter the difficulty screen next
                     choose_difficulty = True
 
-    # Choosing difficulty screen
+    # Choosing difficulty screen ####
     if playing == False and choose_difficulty == True:
 
         # Print Message
@@ -150,8 +150,6 @@ while running:
                     choose_difficulty = False
 
     # Drawing ####
-
-    # Start drawing after start screen
     if drawing:
 
         # Draw the ball
@@ -166,13 +164,12 @@ while running:
         # Score Board ####
         score_font = pygame.font.SysFont("Comic Sans MS", 20)
         score1 = score_font.render("Score: " + str(score[0]), 1, WHITE)
-        screen.blit(score1, (0.25 * WIDTH - 30, 10))
+        screen.blit(score1, (0.25 * WIDTH - 50, 10))
         score2 = score_font.render("Score: " + str(score[1]), 1, WHITE)
-        screen.blit(score2, (0.75 * WIDTH - 30, 10))
+        screen.blit(score2, (0.75 * WIDTH - 50, 10))
+        write_message(screen, f'{POINTS_TO_WIN} points to win', 20, -264, WHITE)
 
     # Animation #####
-
-    # As long as game not over
     if playing:
 
         # Move ball
@@ -194,7 +191,6 @@ while running:
         ai_command = paddle_movement(ai_command, HEIGHT, right_paddle)
 
     # When game is over ####
-
     # If player looses:
     if score[1] == POINTS_TO_WIN:
 
@@ -243,7 +239,6 @@ while running:
                 if event.key == pygame.K_BACKSPACE:
                     # stop game
                     running = False
-
     # If player wins:
     if score[0] == POINTS_TO_WIN:
 

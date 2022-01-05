@@ -17,8 +17,9 @@ PAD_HEIGHT_HALF = PAD_HEIGHT // 2
 OPPONENT_HARD = 100
 OPPONENT_ADVANCED = 250
 OPPONENT_EASY = 500
-POINTS_TO_WIN = 2
+POINTS_TO_WIN = 5
 COOLDOWN = 1500
+PADDLESPEED = 3
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 
 # Define global variables
