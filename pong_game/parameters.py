@@ -32,3 +32,4 @@ running = True  # Running variable
 playing = False  # Play variable to differentiate between in game and out of game action
 choose_difficulty = False  # Variable to enter screen to choose difficulty
 start = True  # Startscreen only showing once when starting the game
+drawing = False  # Variable to turn-off drawing as long as there is game going on

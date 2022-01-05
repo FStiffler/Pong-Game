@@ -97,27 +97,6 @@ while running:
                     # Make sure to enter the difficulty screen next
                     choose_difficulty = True
 
-    # Drawing ####
-
-    # Start drawing after start screen
-    if start == False and choose_difficulty == False:
-
-        # Draw the ball
-        pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
-
-        # Draw paddle on the left
-        pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
-
-        # Draw paddle on the right
-        pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
-
-        # Score Board ####
-        score_font = pygame.font.SysFont("Comic Sans MS", 20)
-        score1 = score_font.render("Score: " + str(score[0]), 1, WHITE)
-        screen.blit(score1, (0.25 * WIDTH - 30, 10))
-        score2 = score_font.render("Score: " + str(score[1]), 1, WHITE)
-        screen.blit(score2, (0.75 * WIDTH - 30, 10))
-
     # Choosing difficulty screen
     if playing == False and choose_difficulty == True:
 
@@ -141,6 +120,8 @@ while running:
                 if event.key == pygame.K_e:
                     # Opponent difficulty
                     difficulty = OPPONENT_EASY
+                    # Restart drawing
+                    drawing = True
                     # Restart game
                     playing = True
                     # Turn of difficulty selection screen
@@ -150,6 +131,8 @@ while running:
                 elif event.key == pygame.K_a:
                     # Opponent difficulty
                     difficulty = OPPONENT_ADVANCED
+                    # Restart drawing
+                    drawing = True
                     # Restart game
                     playing = True
                     # Turn of difficulty selection screen
@@ -159,10 +142,33 @@ while running:
                 elif event.key == pygame.K_h:
                     # Opponent difficulty
                     difficulty = OPPONENT_HARD
+                    # Restart drawing
+                    drawing = True
                     # Restart game
                     playing = True
                     # Turn of difficulty selection screen
                     choose_difficulty = False
+
+    # Drawing ####
+
+    # Start drawing after start screen
+    if drawing:
+
+        # Draw the ball
+        pygame.draw.circle(screen, color=ball.get_color(), center=ball.get_position(), radius=ball.get_size())
+
+        # Draw paddle on the left
+        pygame.draw.polygon(screen, color=left_paddle.get_color(), points=left_paddle.get_polygon())
+
+        # Draw paddle on the right
+        pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
+
+        # Score Board ####
+        score_font = pygame.font.SysFont("Comic Sans MS", 20)
+        score1 = score_font.render("Score: " + str(score[0]), 1, WHITE)
+        screen.blit(score1, (0.25 * WIDTH - 30, 10))
+        score2 = score_font.render("Score: " + str(score[1]), 1, WHITE)
+        screen.blit(score2, (0.75 * WIDTH - 30, 10))
 
     # Animation #####
 
@@ -195,6 +201,9 @@ while running:
         # Stop all animations
         playing = False
 
+        # Stop drawing
+        drawing = False
+
         # Print Message
         write_message(screen, "YOU LOST!", 100, -160, WHITE)
         write_message(screen, "Click [ENTER] to play again!", 20, 150, WHITE)
@@ -218,6 +227,8 @@ while running:
                     score = [0, 0]
                     # Restart game
                     playing = True
+                    # Restart drawing
+                    drawing = True
 
                 # Capture command of enter button
                 if event.key == pygame.K_SPACE:
@@ -236,6 +247,9 @@ while running:
 
         # Stop all animations
         playing = False
+
+        # Stop drawing
+        drawing = False
 
         # Print Message
         write_message(screen, "YOU WON!", 100, -160, WHITE)
@@ -259,6 +273,8 @@ while running:
                     score = [0, 0]
                     # Restart game
                     playing = True
+                    # Restart drawing
+                    drawing = True
 
                 # Capture command of enter button
                 if event.key == pygame.K_SPACE:
