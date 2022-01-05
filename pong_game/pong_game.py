@@ -2,6 +2,7 @@
 import pygame
 from pygame import mixer
 import random
+import os
 
 # Import modules
 from parameters import *
@@ -16,22 +17,24 @@ ball = Ball(RED)
 # Initialize pygame
 pygame.init()
 
+os.path.join(ROOT_DIR, 'ressources/paddle.wav')
+
 # Initialize sounds
-pong_sound = mixer.Sound('paddle.wav')
-win_sound = mixer.Sound('win.wav')
-loss_sound = mixer.Sound('loss.wav')
-goal_sound = mixer.Sound('goal.wav')
-edge_sound = mixer.Sound('edge.wav')
+pong_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/paddle.wav'))
+win_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/win.wav'))
+loss_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/loss.wav'))
+goal_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/goal.wav'))
+edge_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/edge.wav'))
 
 mixer.init()
-mixer.music.load('background.wav')
+mixer.music.load(os.path.join(ROOT_DIR, 'ressources/background.wav'))
 mixer.music.play()
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
 
 # Set background image
-background_image = pygame.image.load("background.jpg").convert()
+background_image = pygame.image.load(os.path.join(ROOT_DIR, 'ressources/background.jpg')).convert()
 
 # Set title
 pygame.display.set_caption("Pong Game")

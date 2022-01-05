@@ -1,4 +1,5 @@
 import random
+import os
 
 # Define Colors
 WHITE = (255, 255, 255)
@@ -18,6 +19,7 @@ OPPONENT_HARD = 100
 OPPONENT_ADVANCED = 250
 OPPONENT_EASY = 500
 POINTS_TO_WIN = 2
+ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 
 # Define global variables
 x_direction = random.sample([1, -1], 1)[0]*1.5  # Initial horizontal movement (left or right)
