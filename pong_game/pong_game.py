@@ -106,22 +106,29 @@ while running:
                 if event.key == pygame.K_e:
                     # Opponent difficulty
                     difficulty = OPPONENT_EASY
+                    # Restart game
+                    playing = True
+                    # Turn of difficulty selection screen
+                    choose_difficulty = False
 
                 # If user chooses [A]
                 elif event.key == pygame.K_a:
                     # Opponent difficulty
                     difficulty = OPPONENT_ADVANCED
+                    # Restart game
+                    playing = True
+                    # Turn of difficulty selection screen
+                    choose_difficulty = False
 
                 # If user chooses [H]
                 elif event.key == pygame.K_h:
                     # Opponent difficulty
                     difficulty = OPPONENT_HARD
+                    # Restart game
+                    playing = True
+                    # Turn of difficulty selection screen
+                    choose_difficulty = False
 
-                # Restart game
-                playing = True
-
-                # Turn of difficulty selection screen
-                choose_difficulty = False
 
     # Animation #####
 
