@@ -29,4 +29,5 @@ command = 0  # paddle movement variable
 score = [0, 0]  # score variable
 score_time = None  # score time variable
 running = True  # Running variable
-playing = True
+playing = False  # Play variable to differentiate between in game and out of game action
+choose_difficulty = True

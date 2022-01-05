@@ -45,6 +45,7 @@ clock = pygame.time.Clock()
 # Run game until user wants to drop out
 while running:
 
+
     # Game Events ####
     for event in pygame.event.get():
 
@@ -81,6 +82,33 @@ while running:
 
     # Draw paddle on the right
     pygame.draw.polygon(screen, color=right_paddle.get_color(), points=right_paddle.get_polygon())
+
+    # If completly new game
+    if playing == False and choose_difficulty == True:
+
+        # Print Message
+        write_message(screen, "Choose Difficulty", 50, -150, WHITE)
+        write_message(screen, "Easy [E]", 30, 150, WHITE)
+        write_message(screen, "Advanced [A]", 30, 190, WHITE)
+        write_message(screen, "Hard [H]", 30, 230, WHITE)
+
+        # Event key
+        for event in pygame.event.get():
+
+            # Let user end game by clicking on close button
+            if event.type == pygame.QUIT:
+                running = False
+
+            # Capture commands by user to move paddle (User holds arrow key to move paddle)
+            if event.type == pygame.KEYDOWN:
+
+                # Capture command of enter button
+                if event.key == pygame.K_RETURN:
+
+                    # Restart game
+                    playing = True
+                    choose_difficulty = False
+
 
     # Animation #####
 
@@ -121,16 +149,10 @@ while running:
         playing = False
 
         # Print Message
-        message_font_main = pygame.font.SysFont("Comic Sans MS", 100)
-        message_font_minor = pygame.font.SysFont("Comic Sans MS", 20)
-        main_message = message_font_main.render("You Lost!", 1, WHITE)
-        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, WHITE)
-        main_message_rect = main_message.get_rect()
-        minor_message_rect = minor_message.get_rect()
-        main_message_rect.center = (WIDTH/2, HEIGHT/2)
-        minor_message_rect.center = (WIDTH/2, HEIGHT/2+200)
-        screen.blit(main_message, main_message_rect)
-        screen.blit(minor_message, minor_message_rect)
+        write_message(screen, "YOU LOST!", 100, -160, WHITE)
+        write_message(screen, "Click [ENTER] to play again!", 20, 150, WHITE)
+
+
 
         # Event key
         for event in pygame.event.get():
@@ -158,16 +180,8 @@ while running:
         playing = False
 
         # Print Message
-        message_font_main = pygame.font.SysFont("Comic Sans MS", 100)
-        message_font_minor = pygame.font.SysFont("Comic Sans MS", 20)
-        main_message = message_font_main.render("You Won!", 1, WHITE)
-        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, WHITE)
-        main_message_rect = main_message.get_rect()
-        minor_message_rect = minor_message.get_rect()
-        main_message_rect.center = (WIDTH / 2, HEIGHT / 2)
-        minor_message_rect.center = (WIDTH / 2, HEIGHT / 2 + 200)
-        screen.blit(main_message, main_message_rect)
-        screen.blit(minor_message, minor_message_rect)
+        write_message(screen, "YOU WON!", 100, -160, WHITE)
+        write_message(screen, "Click [ENTER] to play again", 20, 150, WHITE)
 
         # Event key
         for event in pygame.event.get():
