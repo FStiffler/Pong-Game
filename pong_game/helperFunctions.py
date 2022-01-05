@@ -46,7 +46,7 @@ def collision(left_paddle, right_paddle, ball):
 # Define a function to control movement of ball
 def ball_movement(
         x_direction, y_direction, ball, score, left_paddle, right_paddle, score_time,
-        pong_sound, win_sound, loss_sound):
+        pong_sound, win_sound, loss_sound, goal_sound, edge_sound):
     '''
     x_direction (int): Integer defining the movement direction on x axis
     y_direction (int): Integer defining the movement direction on y axis
@@ -60,6 +60,8 @@ def ball_movement(
     pong_sound (WAV): Sound when ball hits paddle
     win_sound (WAV): Sound when player wins
     loss_sound(WAV): Sound when player loses
+    goal_sound(WAV): Sound when goal is scored
+    edge_sound(WAV): Sound when upper or lower edge is hit
 
     Returns:
     y_direction (int): Movement direction on y-axis after checking all conditions
@@ -73,12 +75,16 @@ def ball_movement(
 
     # If ball touches upper edge
     if ball.get_position()[1] + ball.get_size() > HEIGHT:
+        # edge sound
+        pygame.mixer.Sound.play(edge_sound)
         # invert y movement
         y_direction = y_direction * -1
         return x_direction, y_direction, score, score_time
 
     # If ball touches lower edge
     elif ball.get_position()[1] - ball.get_size() < 0:
+        # edge sound
+        pygame.mixer.Sound.play(edge_sound)
         # invert y movement
         y_direction = y_direction * -1
         return x_direction, y_direction, score, score_time
@@ -87,7 +93,10 @@ def ball_movement(
     elif ball.get_position()[0] - ball.get_size() > WIDTH:
         # Increase score of right player
         score[0] += 1
-        # Play sound if goal means loss
+        # Play sound for goal
+        if score[0] != POINTS_TO_WIN:
+            pygame.mixer.Sound.play(goal_sound)
+        # Play different sound if goal means loss
         if score[0] == POINTS_TO_WIN:
             pygame.mixer.Sound.play(win_sound)
         # get score time
@@ -101,6 +110,9 @@ def ball_movement(
     elif ball.get_position()[0] + ball.get_size() < 0:
         # Increase score of right player
         score[1] += 1
+        # Play sound for goal
+        if score[1] != POINTS_TO_WIN:
+            pygame.mixer.Sound.play(goal_sound)
         # Play sound if goal means loss
         if score[1] == POINTS_TO_WIN:
             pygame.mixer.Sound.play(loss_sound)
@@ -193,7 +205,7 @@ def ai_movement(right_paddle, ball, x_direction, y_direction):
         contact_point = position[1] + (y_direction / x_direction) * (WIDTH - position[0])
 
         # Add random movement to AI to prevent it from being to strong
-        contact_point += random.normalvariate(0, OPPONENT_ADVANCED)
+        contact_point += random.normalvariate(0, OPPONENT_EASY)
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:

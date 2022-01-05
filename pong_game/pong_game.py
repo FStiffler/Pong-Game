@@ -1,5 +1,6 @@
 # Import packages
 import pygame
+from pygame import mixer
 import random
 
 # Import modules
@@ -16,9 +17,15 @@ ball = Ball(RED)
 pygame.init()
 
 # Initialize sounds
-pong_sound = pygame.mixer.Sound('laser.wav')
-win_sound = pygame.mixer.Sound('win.wav')
-loss_sound = pygame.mixer.Sound('loss.wav')
+pong_sound = mixer.Sound('paddle.wav')
+win_sound = mixer.Sound('win.wav')
+loss_sound = mixer.Sound('loss.wav')
+goal_sound = mixer.Sound('goal.wav')
+edge_sound = mixer.Sound('edge.wav')
+
+mixer.init()
+mixer.music.load('background.wav')
+mixer.music.play()
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -83,7 +90,7 @@ while running:
         # Move ball
         x_direction, y_direction, score, score_time = \
             ball_movement(x_direction, y_direction, ball, score, left_paddle, right_paddle,
-                          score_time, pong_sound, win_sound, loss_sound)
+                          score_time, pong_sound, win_sound, loss_sound, goal_sound, edge_sound)
 
         # In case of goal start timer before ball is released once again
         if score_time:
@@ -138,6 +145,42 @@ while running:
                 # Capture command of enter button
                 if event.key == pygame.K_RETURN:
 
+                    # Reset score
+                    score = [0, 0]
+
+                    # Restart game
+                    playing = True
+
+    # If player wins:
+    if score[0] == POINTS_TO_WIN:
+
+        # Stop all animations
+        playing = False
+
+        # Print Message
+        message_font_main = pygame.font.SysFont("Comic Sans MS", 100)
+        message_font_minor = pygame.font.SysFont("Comic Sans MS", 20)
+        main_message = message_font_main.render("You Won!", 1, WHITE)
+        minor_message = message_font_minor.render("Click 'Enter' to play again", 1, WHITE)
+        main_message_rect = main_message.get_rect()
+        minor_message_rect = minor_message.get_rect()
+        main_message_rect.center = (WIDTH / 2, HEIGHT / 2)
+        minor_message_rect.center = (WIDTH / 2, HEIGHT / 2 + 200)
+        screen.blit(main_message, main_message_rect)
+        screen.blit(minor_message, minor_message_rect)
+
+        # Event key
+        for event in pygame.event.get():
+
+            # Let user end game by clicking on close button
+            if event.type == pygame.QUIT:
+                running = False
+
+            # Capture commands by user to move paddle (User holds arrow key to move paddle)
+            if event.type == pygame.KEYDOWN:
+
+                # Capture command of enter button
+                if event.key == pygame.K_RETURN:
                     # Reset score
                     score = [0, 0]
 
