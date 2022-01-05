@@ -185,12 +185,13 @@ def paddle_movement(command, height, paddle):
 
 
 # Create an AI to decide on how to move the paddle
-def ai_movement(right_paddle, ball, x_direction, y_direction):
+def ai_movement(right_paddle, ball, x_direction, y_direction, difficulty):
     '''
     right_paddle (PaddleRight): Right paddle Object
     ball (Ball): Ball object
     x_direction (int): Integer defining the movement direction of the ball on x axis
     y_direction (int): Integer defining the movement direction of the ball on y axis
+    difficulty (int): Integer defining the opponent difficulty
 
     Returns:
     ai_command (int): Command of AI to move paddle up or down
@@ -206,7 +207,7 @@ def ai_movement(right_paddle, ball, x_direction, y_direction):
         contact_point = position[1] + (y_direction / x_direction) * (WIDTH - position[0])
 
         # Add random movement to AI to prevent it from being to strong
-        contact_point += random.normalvariate(0, OPPONENT_EASY)
+        contact_point += random.normalvariate(0, difficulty)
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:

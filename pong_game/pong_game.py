@@ -102,13 +102,26 @@ while running:
             # Capture commands by user to move paddle (User holds arrow key to move paddle)
             if event.type == pygame.KEYDOWN:
 
-                # Capture command of enter button
-                if event.key == pygame.K_RETURN:
+                # If user chooses [E]
+                if event.key == pygame.K_e:
+                    # Opponent difficulty
+                    difficulty = OPPONENT_EASY
 
-                    # Restart game
-                    playing = True
-                    choose_difficulty = False
+                # If user chooses [A]
+                elif event.key == pygame.K_a:
+                    # Opponent difficulty
+                    difficulty = OPPONENT_ADVANCED
 
+                # If user chooses [H]
+                elif event.key == pygame.K_h:
+                    # Opponent difficulty
+                    difficulty = OPPONENT_HARD
+
+                # Restart game
+                playing = True
+
+                # Turn of difficulty selection screen
+                choose_difficulty = False
 
     # Animation #####
 
@@ -128,7 +141,7 @@ while running:
         command = paddle_movement(command, HEIGHT, left_paddle)
 
         # Return AI command for right paddle movement
-        ai_command = ai_movement(right_paddle, ball, x_direction, y_direction)
+        ai_command = ai_movement(right_paddle, ball, x_direction, y_direction, difficulty)
 
         # Move paddle based on proposed movement command of AI
         ai_command = paddle_movement(ai_command, HEIGHT, right_paddle)
