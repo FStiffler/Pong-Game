@@ -16,6 +16,7 @@ ball = Ball(RED)
 
 # Initialize pygame
 pygame.init()
+mixer.init()
 
 os.path.join(ROOT_DIR, 'ressources/paddle.wav')
 
@@ -25,10 +26,8 @@ win_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/win.wav'))
 loss_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/loss.wav'))
 goal_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/goal.wav'))
 edge_sound = mixer.Sound(os.path.join(ROOT_DIR, 'ressources/edge.wav'))
-
-mixer.init()
-mixer.music.load(os.path.join(ROOT_DIR, 'ressources/background.wav'))
-mixer.music.play()
+#mixer.music.load(os.path.join(ROOT_DIR, 'ressources/background.wav'))
+#mixer.music.play()
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -45,6 +44,10 @@ clock = pygame.time.Clock()
 # Run game until user wants to drop out
 while running:
 
+    # Make sure background music restarts
+    if not pygame.mixer.music.get_busy():
+        mixer.music.load(os.path.join(ROOT_DIR, 'ressources/background.wav'))
+        mixer.music.play()
 
     # Game Events ####
     for event in pygame.event.get():
