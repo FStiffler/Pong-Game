@@ -181,7 +181,7 @@ while running:
         if difficulty == 100:
             level = 'Hard'
         elif difficulty == 250:
-            level = 'Advancaced'
+            level = 'Advanced'
         elif difficulty == 500:
             level = 'Easy'
 
@@ -220,8 +220,8 @@ while running:
 
         # Print Message
         write_message(screen, "YOU LOST!", 100, -165, WHITE)
-        write_message(screen, "Final Score", 35, -30, WHITE)
-        write_message(screen, f'{score[0]} - {score[1]}', 35, 30, WHITE)
+        write_message(screen, f'{score[0]} - {score[1]}', 60, -30, WHITE)
+        write_message(screen, f"{level}", 35, 30, WHITE)
         write_message(screen, "Click [ENTER] to play again!", 20, 150, WHITE)
         write_message(screen, "Click [SPACE] to change difficulty ", 20, 190, WHITE)
         write_message(screen, "Click [BACKSPACE] to leave game ", 20, 230, WHITE)
@@ -268,8 +268,8 @@ while running:
 
         # Print Message
         write_message(screen, "YOU WON!", 100, -165, WHITE)
-        write_message(screen, "Final Score", 35, -30, WHITE)
-        write_message(screen, f'{score[0]} - {score[1]}', 35, 30, WHITE)
+        write_message(screen, f'{score[0]} - {score[1]}', 60, -30, WHITE)
+        write_message(screen, f"{level}", 35, 30, WHITE)
         write_message(screen, "Click [ENTER] to play again", 20, 150, WHITE)
         write_message(screen, "Click [SPACE] to change difficulty ", 20, 190, WHITE)
         write_message(screen, "Click [BACKSPACE] to leave game ", 20, 230, WHITE)
