@@ -17,8 +17,8 @@ pygame.init()
 
 # Initialize sounds
 pong_sound = pygame.mixer.Sound('laser.wav')
-goal_sound = pygame.mixer.Sound('goal.wav')
-received_sound = pygame.mixer.Sound('received_goal.wav')
+win_sound = pygame.mixer.Sound('win.wav')
+loss_sound = pygame.mixer.Sound('loss.wav')
 
 # Initialize game window
 screen = pygame.display.set_mode(size=(WIDTH, HEIGHT))
@@ -83,7 +83,7 @@ while running:
         # Move ball
         x_direction, y_direction, score, score_time = \
             ball_movement(x_direction, y_direction, ball, score, left_paddle, right_paddle,
-                          score_time, pong_sound, goal_sound, received_sound)
+                          score_time, pong_sound, win_sound, loss_sound)
 
         # In case of goal start timer before ball is released once again
         if score_time:
@@ -128,12 +128,12 @@ while running:
         # Event key
         for event in pygame.event.get():
 
+            # Let user end game by clicking on close button
+            if event.type == pygame.QUIT:
+                running = False
+
             # Capture commands by user to move paddle (User holds arrow key to move paddle)
             if event.type == pygame.KEYDOWN:
-
-                # Let user end game by clicking on close button
-                if event.type == pygame.QUIT:
-                    running = False
 
                 # Capture command of enter button
                 if event.key == pygame.K_RETURN:
