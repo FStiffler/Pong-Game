@@ -1,8 +1,12 @@
 # Import required packages
 import random
+import pygame
 
 # Import Parameters
+import pygame.time
+
 from parameters import *
+
 
 # Define collision function
 def collision(left_paddle, right_paddle, ball):
@@ -42,7 +46,8 @@ def collision(left_paddle, right_paddle, ball):
 
 # Define a function to control movement of ball
 def ball_movement(
-        x_direction, y_direction, width, height, ball, score, left_paddle, right_paddle):
+        x_direction, y_direction, ball, score, left_paddle, right_paddle, score_time,
+        pong_sound, win_sound, loss_sound, goal_sound, edge_sound):
     '''
     x_direction (int): Integer defining the movement direction on x axis
     y_direction (int): Integer defining the movement direction on y axis
@@ -52,54 +57,75 @@ def ball_movement(
     score (list): A list with two elements, the score of left and right players
     left_paddle (PaddleLeft): The left paddle object of class Paddle
     right_paddle (PaddleRight): The right paddle object of class Paddle
+    score_time (double or None): Time when last goal was scored
+    pong_sound (WAV): Sound when ball hits paddle
+    win_sound (WAV): Sound when player wins
+    loss_sound(WAV): Sound when player loses
+    goal_sound(WAV): Sound when goal is scored
+    edge_sound(WAV): Sound when upper or lower edge is hit
 
     Returns:
     y_direction (int): Movement direction on y-axis after checking all conditions
     x_direction (int): Movement direction on x-axis after checking all conditions
+    score (list): Contains the scores of each player
+    score_time (double or None): Time when last goal was scored. 
     '''
 
     # New Ball position
     ball.set_position(x_direction, y_direction)
 
     # If ball touches upper edge
-    if ball.get_position()[1] + ball.get_size() > height:
+    if ball.get_position()[1] + ball.get_size() > HEIGHT:
+        # edge sound
+        pygame.mixer.Sound.play(edge_sound)
         # invert y movement
         y_direction = y_direction * -1
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If ball touches lower edge
     elif ball.get_position()[1] - ball.get_size() < 0:
+        # edge sound
+        pygame.mixer.Sound.play(edge_sound)
         # invert y movement
         y_direction = y_direction * -1
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
-    # If ball touches right edge
-    elif ball.get_position()[0] - ball.get_size() > width:
-        # Initialize ball a midpoint again
-        ball.set_back()
-        #  New ball direction
-        x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
-        y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
-        # Increase score of left player
+    # If player scores
+    elif ball.get_position()[0] - ball.get_size() > WIDTH:
+        # Increase score of right player
         score[0] += 1
+        # Play sound for goal
+        if score[0] != POINTS_TO_WIN:
+            pygame.mixer.Sound.play(goal_sound)
+        # Play different sound if goal means loss
+        if score[0] == POINTS_TO_WIN:
+            pygame.mixer.Sound.play(win_sound)
+        # get score time
+        score_time = pygame.time.get_ticks()
+        x_direction = random.sample([1, -1], 1)[0] * 1.5  # Horizontal movement (left or right)
+        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0] * 1.5  # Vertical movement (down or up)
 
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
-    # If ball touches left edge
+    # If player gets scored on
     elif ball.get_position()[0] + ball.get_size() < 0:
-        # Initialize ball a midpoint again
-        ball.set_back()
-        #  New ball direction
-        x_direction = random.sample([1, -1], 1)[0]  # Horizontal movement (left or right)
-        y_direction = random.uniform(-1, 1)  # Vertical movement (down or up)
         # Increase score of right player
         score[1] += 1
+        # Play sound for goal
+        if score[1] != POINTS_TO_WIN:
+            pygame.mixer.Sound.play(goal_sound)
+        # Play sound if goal means loss
+        if score[1] == POINTS_TO_WIN:
+            pygame.mixer.Sound.play(loss_sound)
+        # get score time
+        score_time = pygame.time.get_ticks()
+        x_direction = random.sample([1, -1], 1)[0] * 1.5  # Horizontal movement (left or right)
+        y_direction = random.sample([random.uniform(-1, -0.5), random.uniform(0.5, 1)], 1)[0] * 1.5  # Vertical movement (down or up)
 
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
     # If ball touches a paddle
     elif collision(left_paddle, right_paddle, ball):
-     
 
         # If ball speed is still below maximal speed
         if abs(x_direction) < 5:
@@ -107,7 +133,7 @@ def ball_movement(
             # invert x movement with multiplier
             x_direction = x_direction * -1.25
             y_direction = y_direction * 1.25
-           
+
 
         # If ball speed is above maximal speed
         elif abs(x_direction) > 5:
@@ -115,15 +141,16 @@ def ball_movement(
             # invert x movement without multiplier
             x_direction = x_direction * -1
             y_direction = y_direction * 1
-            
-        ball.set_color(list(np.random.choice(range(256), size=3)))
-        left_paddle.set_color(list(np.random.choice(range(256), size=3)))
-        right_paddle.set_color(list(np.random.choice(range(256), size=3)))
-        return x_direction, y_direction, score
+
+        ball.set_color(random.sample(range(0, 256, 1), 3))
+        left_paddle.set_color(random.sample(range(0, 256, 1), 3))
+        right_paddle.set_color(random.sample(range(0, 256, 1), 3))
+        pygame.mixer.Sound.play(pong_sound)
+        return x_direction, y_direction, score, score_time
 
     # If nothing of the above happens
     else:
-        return x_direction, y_direction, score
+        return x_direction, y_direction, score, score_time
 
 
 # Define a function to control movement of paddle
@@ -149,21 +176,22 @@ def paddle_movement(command, height, paddle):
     # Stop upward movement when upper edge is touched
     if top_left_height == height:
         command = 0
-      
-        
 
     # Stop upward movement when upper edge is touched
     if down_left_height == 0:
         command = 0
-       
-     
+
     return command
 
+
 # Create an AI to decide on how to move the paddle
-def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
+def ai_movement(right_paddle, ball, x_direction, y_direction, difficulty):
     '''
+    right_paddle (PaddleRight): Right paddle Object
+    ball (Ball): Ball object
     x_direction (int): Integer defining the movement direction of the ball on x axis
     y_direction (int): Integer defining the movement direction of the ball on y axis
+    difficulty (int): Integer defining the opponent difficulty
 
     Returns:
     ai_command (int): Command of AI to move paddle up or down
@@ -176,15 +204,18 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
         position = ball.get_position()
 
         # Calculate final contact point of ball with right edge
-        contact_point = position[1] + (y_direction/x_direction) * (WIDTH - position[0])
+        contact_point = position[1] + (y_direction / x_direction) * (WIDTH - position[0])
+
+        # Add random movement to AI to prevent it from being to strong
+        contact_point += random.normalvariate(0, difficulty)
 
         # If y position of paddle to high
         if right_paddle.position[1] > contact_point:
-            ai_command = -5
+            ai_command = -3
 
         # If y position of paddle to low
         elif right_paddle.position[1] < contact_point:
-            ai_command = 5
+            ai_command = 3
 
         # If position correct
         else:
@@ -196,4 +227,22 @@ def ai_movement(WIDTH, right_paddle, ball, x_direction, y_direction):
 
     return ai_command
 
+# Print Messages to screen
+def write_message(screen, text, size, hposition, color):
+    '''
+        size (int): Size of message to be written
+        hposition (int): Horizontal position of message
+        text (string): Text to be depicted in message
+        color (tuple): RGB code
+
+        Returns:
+        image with message on top of screen
+        '''
+
+    # Print Message
+    message_font = pygame.font.SysFont("Comic Sans MS", size)
+    message = message_font.render(text, 1, color)
+    message_rect = message.get_rect()
+    message_rect.center = (WIDTH / 2, HEIGHT / 2 + hposition)
+    screen.blit(message, message_rect)
 
