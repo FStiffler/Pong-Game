@@ -14,9 +14,13 @@
 
 ### What other people did or had to say
 
-- be sure to cite your references
+* be sure to cite your references
+  * Take list of project specification
 
 ### Problems and shortcomings of their work
+
+- Basic Game
+- Wanted to extend beyond that
 
 ### How your work is different and/or better
 
@@ -26,11 +30,16 @@
 
 ### Your approach to the problem
 
+- Work with modules, classes and functions
+- Abstraction and decompostion
+- Object oriented Programming
+
 ### What you did
 
 ### Design
 
-- What you already had (and where it came from)
+* What you already had (and where it came from)
+  * Started from scratch but looked a online [tutorial](https://realpython.com/pygame-a-primer/) and already existing [project](https://gist.github.com/vinothpandian/4337527) for some idea.
 
 - What you added/changed
 
@@ -38,7 +47,14 @@
 
 ### What did work?
 
+- Abstraction, Decomposition, Object oriented programming
+- Game flow with clear logic
+
 ### What didn't work?
+
+- Was not able to implement a proper game menu with interactive buttons
+- Was not able to work with global variables  --> a lot of inputs and output per functions
+- Struggled to implement ball cooldown phase
 
 ### Include graphs, equations, pictures, etc. as appropriate
 
@@ -48,7 +64,12 @@
 
 ### What was accomplished / learned?
 
+- Trial and error. Tried to apply knowledge from course and find logical solutions to problems
+
 ### Is there something you would do differently next time?
+
+- Start with a frame work including a menu first and then start building the game within that framework
+- Rely even more on classes (game and menu as classes with methods to play the game) similar to what is done [here](https://www.youtube.com/watch?v=a5JWrd7Y_14&ab_channel=CDcodes)
 
 ### Future work
 
@@ -80,3 +101,5 @@ The links above lead to the raw data files. Some sound effects had to be extract
 ### Anything you found useful
 
 - [First inspiration for how to code pong](https://gist.github.com/vinothpandian/4337527)
+
+- [Pygame documentation](https://www.pygame.org/docs/)
