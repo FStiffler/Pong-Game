@@ -21,7 +21,7 @@ git clone git@github.com:FStiffler/Pong-Game.git
 
 **2. Install requirements**
 
- Move to cloned repository directory and use the following command:
+ Move to cloned repository directory and use the following terminal command:
 
  ```
  pip install -r requirements.txt
@@ -29,7 +29,7 @@ git clone git@github.com:FStiffler/Pong-Game.git
 
  **3. Start game**
 
- Move to subdirectory `pong_game` and use the following command:
+ Move to subdirectory `pong_game` and use the following terminal command:
 
  ```
  python pong_game.py
