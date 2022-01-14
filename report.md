@@ -60,8 +60,6 @@ We made a lot of trial and error, which as well helped us to understand the solu
 Before the start of the project, we thought that we first need to have the basic game and from there on write all further adaptions. Now, after the project is finished, we come the conclusion that next time, we would have started with a framework first and then write the code for the game. This means, we would have created the menu before the actual game.
 Furthermore, we could have used even more classes, since these give the code a clear structure. This could have looked similar to [this](https://www.youtube.com/watch?v=a5JWrd7Y_14&ab_channel=CDcodes)
 
-### Future work
-
 ## References
 
 ### Cites of work
